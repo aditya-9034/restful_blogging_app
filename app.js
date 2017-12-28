@@ -6,7 +6,9 @@ var express=require("express"),
     expressSanitizer=require("express-sanitizer");
 
 //APP CONFIG   
-mongoose.connect("mongodb://localhost/restful_blog_app",{useMongoClient:true});
+var url=process.env.DBURL||"mongodb://localhost/restful_blog_app";
+mongoose.Promise=global.Promise;
+mongoose.connect(url,{useMongoClient:true});
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
